@@ -19,11 +19,18 @@ class AbstractItem(core_models.TimeStampedModel):
 class RoomType(AbstractItem):
     """RoomType definition"""
 
+    class Meta:
+        verbose_name = "Room Type"
+        ordering = ["name"]
+
     pass
 
 
 class Amenity(AbstractItem):
     """Amenity definition"""
+
+    class Meta:
+        verbose_name_plural = "Amenities"
 
     pass
 
@@ -31,11 +38,17 @@ class Amenity(AbstractItem):
 class Facility(AbstractItem):
     """Facility definition"""
 
+    class Meta:
+        verbose_name_plural = "Facilities"
+
     pass
 
 
 class HouseRule(AbstractItem):
     """HouseRule definition"""
+
+    class Meta:
+        verbose_name = "House Rule"
 
     pass
 
@@ -58,9 +71,21 @@ class Room(core_models.TimeStampedModel):
     instant_book = models.BooleanField(default=False)
     host = models.ForeignKey(user_models.User, on_delete=models.CASCADE)
     room_type = models.ForeignKey(RoomType, on_delete=models.SET_NULL, null=True)
-    ameniies = models.ManyToManyField(Amenity)
-    facilities = models.ManyToManyField(Facility)
-    house_rules = models.ManyToManyField(HouseRule)
+    facilities = models.ManyToManyField(Facility, blank=True)
+    house_rules = models.ManyToManyField(HouseRule, blank=True)
+    amenities = models.ManyToManyField(Amenity, blank=True)
 
     def __str__(self):
         return self.name
+
+
+class Photo(core_models.TimeStampedModel):
+    """Photo Model Definition"""
+
+    caption = models.CharField(max_length=80)
+    file = models.ImageField()
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    # room = models.ForeignKey("Room", on_delete=models.CASCADE) # also work!
+
+    def __str__(self):
+        return self.caption
