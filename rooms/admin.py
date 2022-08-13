@@ -77,7 +77,15 @@ class RoomAdmin(admin.ModelAdmin):
         "check_in",
         "check_out",
         "instant_book",
+        "count_amenities",
     )
+
+    # for ordering item by below attr
+    # ordering = (
+    #     "name",
+    #     "price",
+    #     "bedrooms",
+    # )
     list_filter = (
         "instant_book",
         "host__superhost",
@@ -92,7 +100,14 @@ class RoomAdmin(admin.ModelAdmin):
     # foreign_key__attr access to host.username
     search_fields = ("^city", "^host__username")
 
+    # only for many-to-many
     filter_horizontal = ("amenities", "facilities", "house_rules")
+
+    # obj is a current row
+    def count_amenities(self, obj):
+        return obj.amenities.count()
+
+    count_amenities.short_description = "Num# amenities"
 
 
 @admin.register(models.Photo)
