@@ -155,3 +155,12 @@ cython_debug/
 .vscode/
 Pipfile
 Pipfile.lock
+assets/
+
+conversations/migrations/
+users/migrations/
+rooms/migrations/
+reviews/migrations/
+reservations/migrations/
+lists/migrations/
+core/migrations/

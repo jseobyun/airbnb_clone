@@ -50,6 +50,7 @@ class RoomAdmin(admin.ModelAdmin):
                 "fields": (
                     "guests",
                     "beds",
+                    "bedrooms",
                     "baths",
                 )
             },
