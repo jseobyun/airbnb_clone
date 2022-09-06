@@ -137,6 +137,8 @@ AUTH_USER_MODEL = "users.User"
 
 # media files like photos will be saved at here
 MEDIA_ROOT = os.path.join(BASE_DIR, "assets")
+MEDAI_URL = "/media/"  # it should end with slash. Starting slash make url shorter, relative form.
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
