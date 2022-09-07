@@ -1,3 +1,4 @@
+from curses import raw
 from django.contrib import admin
 from django.utils.html import mark_safe
 from . import models
@@ -19,10 +20,15 @@ class ItemAdmin(admin.ModelAdmin):
         return obj.rooms.count()
 
 
+class PhotoInline(admin.TabularInline):
+    model = models.Photo
+
+
 @admin.register(models.Room)
 class RoomAdmin(admin.ModelAdmin):
     """Room Admin Definition"""
 
+    inlines = (PhotoInline,)
     fieldsets = (
         (
             "Basic Info",
@@ -105,6 +111,9 @@ class RoomAdmin(admin.ModelAdmin):
         "city",
         "country",
     )
+
+    raw_id_fields = ("host",)
+
     # ^ denotes startswith
     # default denotes icontains
     # foreign_key__attr access to host.username
