@@ -3,7 +3,7 @@ from rooms import models as room_models
 
 
 class Command(BaseCommand):
-    help = "This command is for the test."
+    help = "This command creates amenities"
 
     # def add_arguments(self, parser):
     #     parser.add_argument("--times", type=int)
@@ -55,4 +55,6 @@ class Command(BaseCommand):
         ]
         for amenity in amenities:
             room_models.Amenity.objects.create(name=amenity)
-        self.stdout.write(self.style.SUCCESS("Amenities are created!"))
+        self.stdout.write(
+            self.style.SUCCESS(f"{len(amenities)} amenities are created!")
+        )
