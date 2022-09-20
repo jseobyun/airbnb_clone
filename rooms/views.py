@@ -1,19 +1,16 @@
-from datetime import datetime
 from django.shortcuts import render
+from . import models
 
 # from django.http import HttpResponse
 
 
 # Create your views here.
 def all_rooms(request):
-    now = datetime.now()
-    hungry = True
-    # return HttpResponse(content="hello")
+    all_rooms = models.Room.objects.all()
     context = {
-        "now": now,
-        "hungry": hungry,
+        "rooms": all_rooms,
     }
-    return render(request, "all_rooms.html", context=context)
+    return render(request, "rooms/home.html", context=context)
 
 
 1
